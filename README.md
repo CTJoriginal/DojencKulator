@@ -1,4 +1,4 @@
-# DojencKulator
+# DojenčKulator
 
 Izračuna datume obiskov novoroječkov na podlagi vnešenih podatkov, nato pa rezultate shrani v tekstovne dotateke, urejene po letih. Te dotateke se nahajajo na c:\DojencKulator.
 
