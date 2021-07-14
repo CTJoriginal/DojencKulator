@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace DojencKulator
 {
@@ -8,8 +10,12 @@ namespace DojencKulator
         static void Main(string[] args)
         {
             int leto, mesec, dan;
-            string ime;
+            int letoizp, mesecizp, danizp;
+            string ime, datum, datumizp;
             DateTime Rojstvo;
+            DateTime Izpust;
+
+            String[] separator = { ".", "," };
 
             while (true)
             {
@@ -18,17 +24,33 @@ namespace DojencKulator
                 Console.WriteLine("Prosim izpolni spodnje podatke:");
                 Console.Write("Ime in Priimek: ");
                 ime = Console.ReadLine();
-                Console.Write("Dan rojstva: ");
-                dan = Int32.Parse(Console.ReadLine());
-                Console.Write("Mesec rojstva: ");
-                mesec = Int32.Parse(Console.ReadLine());
-                Console.Write("Leto rojstva: ");
-                leto = Int32.Parse(Console.ReadLine());
+
+                //reads date of birth
+                Console.Write("\nFormat: DD.MM.LLLL\n -Datum rojstva: ");
+                datum = Console.ReadLine();
+                Console.Write(" -Datum izpusta: ");
+                datumizp = Console.ReadLine();
+
+                //separates dates into 3 strings in array
+                String[] datumSplit = datum.Split(separator, 3, StringSplitOptions.RemoveEmptyEntries);
+                String[] datumSplitizp = datumizp.Split(separator, 3, StringSplitOptions.RemoveEmptyEntries);
+
+                //assigns strings from array to variables
+                dan = Int32.Parse(datumSplit[0]);
+                mesec = Int32.Parse(datumSplit[1]);
+                leto = Int32.Parse(datumSplit[2]);
+                danizp = Int32.Parse(datumSplitizp[0]);
+                mesecizp = Int32.Parse(datumSplitizp[1]);
+                letoizp = Int32.Parse(datumSplitizp[2]);
+
 
                 Rojstvo = new DateTime(leto, mesec, dan);
+                Izpust = new DateTime(letoizp, mesecizp, danizp);
+
                 try
                 {
                     Rojstvo = new DateTime(leto, mesec, dan);
+                    Izpust = new DateTime(letoizp, mesecizp, danizp);
                 }
                 catch
                 {
@@ -52,6 +74,7 @@ namespace DojencKulator
                 Console.WriteLine("Vnešeni podatki:");
                 Console.WriteLine("Ime: " + ime);
                 Console.WriteLine("Datum rojstva: " + Rojstvo.ToString("dd.MM.yyyy"));
+                Console.WriteLine("Datum izpusta: " + Izpust.ToString("dd.MM.yyyy"));
 
                 Console.WriteLine("Ali so vnešeni podatki pravilni? [Y/N]");
 
@@ -66,41 +89,85 @@ namespace DojencKulator
                 }
             }
 
-            Console.WriteLine(" DojenčKulator rezultati:");
-            Console.WriteLine("--------------------------");
-            Console.WriteLine();
-            Console.WriteLine(" Novorojenček: " + ime);
-            Console.WriteLine(" Rojen: " + Rojstvo.ToString("dd.MM.yyyy"));
-            Console.WriteLine();
-            Console.WriteLine("--------------------------");
-            Console.WriteLine(" Obiski novorojenčka: ");
-            Console.WriteLine(" 1. Obisk: " + Rojstvo.AddDays(1).ToString("dd.MM.yyyy") + " V 24 urah po odpustu, tudi če je dela prost dan.");
-            Console.WriteLine(" 2. Obisk: " + Rojstvo.AddDays(7).ToString("dd.MM.yyyy") + " Prvi do drugi teden po odpustu.");
-            Console.WriteLine(" 3. Obisk: " + Rojstvo.AddDays(14).ToString("dd.MM.yyyy") + " Drugi teden po odpustu.");
-            Console.WriteLine(" 4. Obisk: " + Rojstvo.AddDays(21).ToString("dd.MM.yyyy") + " Tretji teden po odpustu.");
-            Console.WriteLine(" 5. Obisk: " + Rojstvo.AddMonths(4).AddDays(14).ToString("dd.MM.yyyy") + " V starosti od 4 do 5 mesecev.");
-            Console.WriteLine(" 6. Obisk: " + Rojstvo.AddMonths(6).AddDays(14).ToString("dd.MM.yyyy") + " V starosti od 10 do 11 mesecev.");
-            Console.WriteLine();
-            Console.WriteLine("--------------------------");
-            Console.WriteLine();
-            Console.WriteLine(" Življenske stopnje:");
-            Console.WriteLine(" Novorojenček: " + Rojstvo.ToString("dd.MM.yyyy") + " - 0-28dni");
-            Console.WriteLine(" Dojenček:     " + Rojstvo.AddDays(29).ToString("dd.MM.yyyy" + " - 29dni - 1 leta"));
-            Console.WriteLine(" Malček:       " + Rojstvo.AddYears(3).AddMonths(11).AddDays(29).ToString("dd.MM.yyyy") + " - od 1 leta do 3.9 leta");
-            Console.WriteLine();
-            Console.WriteLine("--------------------------");
-            Console.WriteLine();
-            Console.WriteLine(" Obiski otročnice");
-            Console.WriteLine(" 1. Obisk: " + Rojstvo.AddDays(3).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddDays(6).ToString("dd.MM.yyyy") + (" 3-6 dni"));
-            Console.WriteLine(" 2. Obisk: " + Rojstvo.AddDays(28).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddDays(42).ToString("dd.MM.yyyy") + (" 4-6 tednov"));
-            Console.WriteLine();
+            String[] results =
+            {
+                " DojenčKulator rezultati:",
+                "--------------------------",
+                "",
+                " Novorojenček: " + ime,
+                " Rojen: " + Rojstvo.ToString("dd.MM.yyyy"),
+                "",
+                "--------------------------",
+                " Obiski novorojenčka: ",
+                " 1. Obisk: " + Izpust.AddDays(1).ToString("dd.MM.yyyy") + " V 24 urah po odpustu, tudi če je dela prost dan.",
+                " 2. Obisk: " + Izpust.AddDays(7).ToString("dd.MM.yyyy") + " Prvi do drugi teden po odpustu.",
+                " 3. Obisk: " + Izpust.AddDays(14).ToString("dd.MM.yyyy") + " Drugi teden po odpustu.",
+                " 4. Obisk: " + Izpust.AddDays(21).ToString("dd.MM.yyyy") + " Tretji teden po odpustu.",
+                " 5. Obisk: " + Izpust.AddMonths(4).AddDays(14).ToString("dd.MM.yyyy") + " V starosti od 4 do 5 mesecev.",
+                " 6. Obisk: " + Izpust.AddMonths(6).AddDays(14).ToString("dd.MM.yyyy") + " V starosti od 10 do 11 mesecev.",
+                "",
+                "--------------------------",
+                "",
+                " Življenske stopnje:",
+                " Novorojenček: " + Rojstvo.ToString("dd.MM.yyyy") + " - 0-28 dni",
+                " Dojenček:     " + Rojstvo.AddDays(29).ToString("dd.MM.yyyy" + " - 29 dni - 1 leta"),
+                " Malček:       " + Rojstvo.AddYears(3).AddMonths(11).AddDays(29).ToString("dd.MM.yyyy") + " - od 1 leta do 3.9 leta",
+                "",
+                "--------------------------",
+                "",
+                " Obiski otročnice",
+                " 1. Obisk: " + Izpust.AddDays(3).ToString("dd.MM.yyyy") + " do " + Izpust.AddDays(6).ToString("dd.MM.yyyy") + (" 3-6 dni"),
+                " 2. Obisk: " + Izpust.AddDays(28).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddDays(42).ToString("dd.MM.yyyy") + (" 4-6 tednov"),
+                "",
+                "",
+                "Powered by DojencKulator"
+               
+            };
+
+            foreach(string s in results)
+            {
+                Console.WriteLine(s);
+            }
+            
             Console.WriteLine("--------------------------");
             Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n");
             Console.WriteLine("Hvala ker uporabljate DojenčKulator!");
             Console.WriteLine("Klikni <enter> za izhod");
-            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
-        }
-    }
 
+            // Specify a name for your top-level folder.
+            string folderName = @"c:\DojencKulator";
+
+            // To create a string that specifies the path to a subfolder under your
+            // top-level folder, add a name for the subfolder to folderName.
+            string pathString = System.IO.Path.Combine(folderName, leto.ToString());
+
+            System.IO.Directory.CreateDirectory(pathString);
+
+            // Create a file name for the file you want to create.
+            string fileName = ime + ".txt";
+
+            // Use Combine again to add the file name to the path.
+            pathString = System.IO.Path.Combine(pathString, fileName);
+
+            // Verify the path that you have constructed.
+            Console.WriteLine("Pot do shranjene dotateke: {0}\n", pathString);
+
+            if (!System.IO.File.Exists(pathString))
+            {
+                File.WriteAllLinesAsync(pathString, results);
+            }
+            else
+            {
+                Console.WriteLine("File \"{0}\" already exists.", fileName);
+                return;
+            }
+
+            while (Console.ReadKey().Key != ConsoleKey.Enter)
+            {
+            
+            }  
+        }
+
+
+    }
 }
-      
