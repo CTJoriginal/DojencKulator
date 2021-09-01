@@ -19,10 +19,10 @@ namespace DojencKulator
 
             while (true)
             {
-                Console.WriteLine("Doborodošli v DojenčKulator V1.0!");
+                Console.WriteLine("Doborodošli v DojenčKulator V1.1!");
                 Console.WriteLine();
                 Console.WriteLine("Prosim izpolni spodnje podatke:");
-                Console.Write("Ime in Priimek: ");
+                Console.Write("Priimek in ime: ");
                 ime = Console.ReadLine();
 
                 //reads date of birth
@@ -57,6 +57,8 @@ namespace DojencKulator
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Eden od vnešenih podatkov ni bil v skladu z pravili.");
                     Console.WriteLine("Bodi pozoren pri zapisu datuma");
+                    Console.WriteLine("\n\n\n\n\n");
+
                     Console.ForegroundColor = ConsoleColor.White;
 
                     if (Console.ReadKey().Key == ConsoleKey.Enter)
@@ -100,24 +102,24 @@ namespace DojencKulator
                 "--------------------------",
                 " Obiski novorojenčka: ",
                 " 1. Obisk: " + Izpust.AddDays(1).ToString("dd.MM.yyyy") + " V 24 urah po odpustu, tudi če je dela prost dan.",
-                " 2. Obisk: " + Izpust.AddDays(7).ToString("dd.MM.yyyy") + " Prvi do drugi teden po odpustu.",
+                " 2. Obisk: " + Izpust.AddDays(7).ToString("dd.MM.yyyy") + Izpust.AddDays(14).ToString("dd.MM.yyyy") + " Prvi do drugi teden po odpustu.",
                 " 3. Obisk: " + Izpust.AddDays(14).ToString("dd.MM.yyyy") + " Drugi teden po odpustu.",
                 " 4. Obisk: " + Izpust.AddDays(21).ToString("dd.MM.yyyy") + " Tretji teden po odpustu.",
-                " 5. Obisk: " + Izpust.AddMonths(4).AddDays(14).ToString("dd.MM.yyyy") + " V starosti od 4 do 5 mesecev.",
-                " 6. Obisk: " + Izpust.AddMonths(6).AddDays(14).ToString("dd.MM.yyyy") + " V starosti od 10 do 11 mesecev.",
+                " 5. Obisk: od " + Rojstvo.AddMonths(4).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddMonths(5).ToString("dd.MM.yyyy") + " V starosti od 4 do 5 mesecev.",
+                " 6. Obisk: od " + Rojstvo.AddMonths(10).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddMonths(11).ToString("dd.MM.yyyy") + " V starosti od 10 do 11 mesecev.",
                 "",
                 "--------------------------",
                 "",
                 " Življenske stopnje:",
-                " Novorojenček: " + Rojstvo.ToString("dd.MM.yyyy") + " - 0-28 dni",
-                " Dojenček:     " + Rojstvo.AddDays(29).ToString("dd.MM.yyyy" + " - 29 dni - 1 leta"),
-                " Malček:       " + Rojstvo.AddYears(3).AddMonths(11).AddDays(29).ToString("dd.MM.yyyy") + " - od 1 leta do 3.9 leta",
+                " Novorojenček: " + Rojstvo.ToString("dd.MM.yyyy") + " do " + Rojstvo.AddDays(27).ToString("dd.MM.yyyy") + " - 0-28 dni",
+                " Dojenček:     " + Rojstvo.AddDays(28).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddYears(1).ToString("dd.MM.yyyy") + " - 29 dni - 1 leta",
+                " Malček:       " + Rojstvo.AddYears(1).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddYears(3).AddMonths(11).AddDays(29).ToString("dd.MM.yyyy") + " - od 1 leta do 3.9 leta",
                 "",
                 "--------------------------",
                 "",
                 " Obiski otročnice",
-                " 1. Obisk: " + Izpust.AddDays(3).ToString("dd.MM.yyyy") + " do " + Izpust.AddDays(6).ToString("dd.MM.yyyy") + (" 3-6 dni"),
-                " 2. Obisk: " + Izpust.AddDays(28).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddDays(42).ToString("dd.MM.yyyy") + (" 4-6 tednov"),
+                " 1. Obisk: " + Izpust.AddDays(3).ToString("dd.MM.yyyy") + " do " + Izpust.AddDays(7).ToString("dd.MM.yyyy") + (" 3-7 dni"),
+                " 2. Obisk: " + Rojstvo.AddDays(28).ToString("dd.MM.yyyy") + " do " + Rojstvo.AddDays(42).ToString("dd.MM.yyyy") + (" 4-6 tednov"),
                 "",
                 "",
                 "Powered by DojencKulator"
